@@ -3,59 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mostrar Meu Cookie Roblox (Somente Local)</title>
+  <title>Mostrar Meu Cookie Roblox</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #0d1117;
       color: #c9d1d9;
       margin: 0;
-      padding: 30px;
+      padding: 40px 20px;
       text-align: center;
     }
     .container {
       max-width: 800px;
       margin: 0 auto;
       background: #161b22;
-      padding: 30px;
+      padding: 40px;
       border-radius: 12px;
       border: 1px solid #30363d;
     }
     textarea {
       width: 100%;
-      min-height: 180px;
+      min-height: 160px;
       background: #0d1117;
       color: #58a6ff;
       border: 1px solid #30363d;
-      border-radius: 6px;
+      border-radius: 8px;
       padding: 16px;
       font-family: Consolas, monospace;
       font-size: 15px;
       resize: vertical;
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
     button {
       background: #238636;
       color: white;
       border: none;
-      padding: 16px 50px;
+      padding: 16px 60px;
       font-size: 18px;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.25s;
     }
     button:hover {
       background: #2ea043;
     }
-    .aviso-vermelho {
-      background: #21262d;
-      padding: 18px;
+    .aviso {
+      background: #2d1a1a;
+      padding: 20px;
       border-radius: 8px;
-      margin: 25px 0;
+      margin: 30px 0;
       border-left: 5px solid #f85149;
-      color: #f85149;
+      color: #ffcccc;
       font-weight: bold;
       font-size: 16px;
+      line-height: 1.5;
     }
     .info {
       color: #8b949e;
@@ -67,61 +68,62 @@
 <body>
 
 <div class="container">
-  <h2>Mostrar Cookie Roblox (apenas pra você, local no navegador)</h2>
+  <h2>Mostrar Meu Cookie Roblox</h2>
+  <p style="color: #aaa; margin-bottom: 30px;">(apenas o seu, só no seu navegador atual)</p>
   
-  <textarea id="cookieBox" readonly placeholder="Clique no botão abaixo pra ver seu .ROBLOSECURITY (se estiver logado no roblox.com oficial)"></textarea>
+  <textarea id="cookieBox" readonly placeholder="Clique no botão para tentar mostrar seu .ROBLOSECURITY..."></textarea>
   
-  <button onclick="mostrarCookie()">Mostrar Cookie Roblox apenas pra você?</button>
+  <button onclick="pegarCookie()">Mostrar meu cookie Roblox</button>
   
-  <div class="aviso-vermelho">
-    ⚠️ NUNCA cole esse valor em sites, Discord, links ou mande pra ninguém!  
-    Quem pedir seu cookie quer roubar sua conta.  
-    Esse código NÃO envia nada pra fora — roda 100% no seu navegador.
+  <div class="aviso">
+    ⚠️ IMPORTANTE ⚠️<br><br>
+    Esse código mostra APENAS o cookie da sua sessão atual.<br>
+    NUNCA cole esse valor em sites, Discord, links ou mande pra ninguém.<br>
+    Quem pedir seu cookie quer roubar sua conta.
   </div>
   
   <div class="info">
-    • Funciona só se você abriu roblox.com e está logado lá nesse navegador.<br>
-    • NÃO funciona no app oficial do Roblox (celular).<br>
-    • Se aparecer "Não encontrei", faça login no site oficial primeiro.<br>
-    • Se quiser usar no celular, abra roblox.com no navegador (Chrome, etc.), não no app.
+    • Precisa estar logado em https://www.roblox.com nesse navegador<br>
+    • Não funciona no app oficial do Roblox<br>
+    • Se não aparecer nada: faça login no site oficial e tente novamente
   </div>
 </div>
 
 <script>
-function mostrarCookie() {
+function pegarCookie() {
   const box = document.getElementById("cookieBox");
-  box.value = "Buscando seu .ROBLOSECURITY...\n\n";
+  box.value = "Buscando .ROBLOSECURITY...\n\n";
 
-  let cookieValue = "";
+  let cookie = "";
   const cookies = document.cookie.split(';');
 
-  for (let c of cookies) {
-    const [nome, valor] = c.trim().split('=');
+  for (let parte of cookies) {
+    const [nome, valor] = parte.trim().split('=');
     if (nome === '.ROBLOSECURITY') {
-      cookieValue = valor;
+      cookie = valor;
       break;
     }
   }
 
-  if (cookieValue) {
-    box.value = cookieValue;
-
-    // Tenta copiar pro clipboard
-    navigator.clipboard.writeText(cookieValue)
+  if (cookie) {
+    box.value = cookie;
+    
+    // Tenta copiar automaticamente
+    navigator.clipboard.writeText(cookie)
       .then(() => {
-        alert("Cookie copiado pra área de transferência! 🎉\n\nCUIDADO EXTREMO: NUNCA compartilhe isso com ninguém, nem cole em sites.");
+        alert("Cookie copiado para a área de transferência!\n\nCUIDADO: NUNCA compartilhe isso com ninguém.");
       })
       .catch(() => {
         alert("Cookie encontrado! Selecione o texto na caixa e copie manualmente (Ctrl+C).");
       });
   } else {
     box.value = "Não encontrei o .ROBLOSECURITY nesse navegador.\n\n" +
-                "Possíveis motivos:\n" +
-                "1. Você não está logado no roblox.com oficial agora\n" +
-                "2. Está usando o APP do Roblox (não funciona nele)\n" +
-                "3. Modo anônimo / cookies bloqueados / limpou dados\n" +
-                "4. O cookie expirou ou mudou de formato (Roblox atualiza às vezes)\n\n" +
-                "Solução rápida: Abra https://www.roblox.com, faça login e clique no botão de novo.";
+                "Motivos mais comuns:\n" +
+                "1. Você não está logado no roblox.com agora\n" +
+                "2. Está usando o aplicativo oficial do Roblox (não funciona)\n" +
+                "3. Modo anônimo, cookies bloqueados ou limpou os dados\n" +
+                "4. O login foi feito em outro navegador/dispositivo\n\n" +
+                "Abra https://www.roblox.com, faça login e clique novamente.";
   }
 }
 </script>
