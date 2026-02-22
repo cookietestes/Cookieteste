@@ -12,7 +12,7 @@
     }
     body {
       font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: url('https://vulplex.com/images/featured/Minimalist-Discord-Logo-Wallpaper-on-Soothing-Blue-Background-66deda7fadf4d.jpg') no-repeat center center fixed;
+      background: url('image.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
       height: 100vh;
@@ -26,7 +26,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.40); /* escurece mais um pouco se precisar */
       pointer-events: none;
       z-index: 1;
     }
@@ -36,10 +36,10 @@
       max-width: 1100px;
       height: 85vh;
       max-height: 700px;
-      background: rgba(30, 30, 50, 0.75);
+      background: rgba(30, 30, 50, 0.80);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
       backdrop-filter: blur(10px);
       position: relative;
       z-index: 2;
@@ -53,7 +53,7 @@
     }
     .right {
       flex: 1;
-      background: rgba(54, 57, 63, 0.9);
+      background: rgba(54, 57, 63, 0.92);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -80,7 +80,7 @@
     input {
       width: 100%;
       padding: 14px;
-      margin-bottom: 12px; /* reduzido um pouco pra caber o link logo abaixo */
+      margin-bottom: 12px;
       background: #202225;
       border: 1px solid #2f3136;
       border-radius: 4px;
@@ -98,7 +98,7 @@
       text-decoration: none;
       display: block;
       margin-bottom: 24px;
-      text-align: left; /* alinhado à ESQUERDA como pedido */
+      text-align: left;
     }
     .forgot-link:hover {
       text-decoration: underline;
@@ -114,7 +114,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
-      margin-bottom: 16px; /* espaço antes do texto final */
+      margin-bottom: 16px;
     }
     button:hover {
       background: #4752c4;
