@@ -1,132 +1,199 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mostrar Meu Cookie Roblox</title>
+  <title>Discord - Login</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0d1117;
-      color: #c9d1d9;
+    * {
       margin: 0;
-      padding: 40px 20px;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0f1a, #1a0f2e, #2e0f3a);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    /* Fundo com partículas/estrelas sutis (como no Discord) */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(100,200,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      animation: twinkle 20s infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
     }
     .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #161b22;
-      padding: 40px;
+      display: flex;
+      width: 90%;
+      max-width: 1100px;
+      height: 85vh;
+      max-height: 700px;
+      background: rgba(0,0,0,0.4);
       border-radius: 12px;
-      border: 1px solid #30363d;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      position: relative;
+      z-index: 2;
     }
-    textarea {
+    .left {
+      flex: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(30,30,50,0.7);
+    }
+    .right {
+      flex: 1;
+      background: linear-gradient(to bottom, #5865f2, #4752c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    p.subtitle {
+      color: #b9bbbe;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #b9bbbe;
+      font-weight: 600;
+    }
+    input {
       width: 100%;
-      min-height: 160px;
-      background: #0d1117;
-      color: #58a6ff;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      padding: 16px;
-      font-family: Consolas, monospace;
-      font-size: 15px;
-      resize: vertical;
-      margin: 20px 0;
+      padding: 14px;
+      margin-bottom: 24px;
+      background: #202225;
+      border: 1px solid #2f3136;
+      border-radius: 4px;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+    }
+    input:focus {
+      border-color: #5865f2;
+      box-shadow: 0 0 0 2px rgba(88,101,242,0.3);
     }
     button {
-      background: #238636;
+      width: 100%;
+      padding: 14px;
+      background: #5865f2;
       color: white;
       border: none;
-      padding: 16px 60px;
-      font-size: 18px;
-      border-radius: 6px;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.25s;
+      transition: background 0.2s;
     }
     button:hover {
-      background: #2ea043;
+      background: #4752c4;
     }
-    .aviso {
-      background: #2d1a1a;
-      padding: 20px;
+    .links {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .links a {
+      color: #00aff4;
+      text-decoration: none;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    .qr-section {
+      text-align: center;
+      color: white;
+    }
+    .qr-section img {
+      width: 180px;
+      height: 180px;
+      margin: 20px 0;
       border-radius: 8px;
-      margin: 30px 0;
-      border-left: 5px solid #f85149;
-      color: #ffcccc;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 1.5;
+      background: white; /* placeholder pro QR */
     }
-    .info {
-      color: #8b949e;
-      font-size: 14px;
-      margin-top: 30px;
+    .qr-section p {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .qr-section small {
+      color: #b9bbbe;
+    }
+    .voltar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #00aff4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      .container { flex-direction: column; height: auto; }
+      .right { padding: 40px 20px; }
+      .left { padding: 40px 30px; }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h2>Mostrar Meu Cookie Roblox</h2>
-  <p style="color: #aaa; margin-bottom: 30px;">(apenas o seu, só no seu navegador atual)</p>
-  
-  <textarea id="cookieBox" readonly placeholder="Clique no botão para tentar mostrar seu .ROBLOSECURITY..."></textarea>
-  
-  <button onclick="pegarCookie()">Mostrar meu cookie Roblox</button>
-  
-  <div class="aviso">
-    ⚠️ IMPORTANTE ⚠️<br><br>
-    Esse código mostra APENAS o cookie da sua sessão atual.<br>
-    NUNCA cole esse valor em sites, Discord, links ou mande pra ninguém.<br>
-    Quem pedir seu cookie quer roubar sua conta.
-  </div>
-  
-  <div class="info">
-    • Precisa estar logado em https://www.roblox.com nesse navegador<br>
-    • Não funciona no app oficial do Roblox<br>
-    • Se não aparecer nada: faça login no site oficial e tente novamente
-  </div>
-</div>
-
-<script>
-function pegarCookie() {
-  const box = document.getElementById("cookieBox");
-  box.value = "Buscando .ROBLOSECURITY...\n\n";
-
-  let cookie = "";
-  const cookies = document.cookie.split(';');
-
-  for (let parte of cookies) {
-    const [nome, valor] = parte.trim().split('=');
-    if (nome === '.ROBLOSECURITY') {
-      cookie = valor;
-      break;
-    }
-  }
-
-  if (cookie) {
-    box.value = cookie;
+  <div class="container">
+    <div class="left">
+      <a href="#" class="voltar">&lt; Voltar</a>
+      
+      <h1>Boas-vindas de volta!</h1>
+      <p class="subtitle">Estamos muito animados em te ver novamente!</p>
+      
+      <form>
+        <label for="email">E-mail ou número de telefone *</label>
+        <input type="text" id="email" placeholder="" required />
+        
+        <label for="senha">Senha *</label>
+        <input type="password" id="senha" placeholder="" required />
+        
+        <a href="#" style="color:#00aff4; font-size:0.9rem; display:block; margin:-16px 0 24px; text-align:right;">Esqueceu sua senha?</a>
+        
+        <button type="submit">Entrar</button>
+      </form>
+      
+      <div class="links">
+        <p>Ou faça login com uma <a href="#">passkey</a></p>
+        <p>Precisando de uma conta? <a href="#">Registre-se</a></p>
+      </div>
+    </div>
     
-    // Tenta copiar automaticamente
-    navigator.clipboard.writeText(cookie)
-      .then(() => {
-        alert("Cookie copiado para a área de transferência!\n\nCUIDADO: NUNCA compartilhe isso com ninguém.");
-      })
-      .catch(() => {
-        alert("Cookie encontrado! Selecione o texto na caixa e copie manualmente (Ctrl+C).");
-      });
-  } else {
-    box.value = "Não encontrei o .ROBLOSECURITY nesse navegador.\n\n" +
-                "Motivos mais comuns:\n" +
-                "1. Você não está logado no roblox.com agora\n" +
-                "2. Está usando o aplicativo oficial do Roblox (não funciona)\n" +
-                "3. Modo anônimo, cookies bloqueados ou limpou os dados\n" +
-                "4. O login foi feito em outro navegador/dispositivo\n\n" +
-                "Abra https://www.roblox.com, faça login e clique novamente.";
-  }
-}
-</script>
+    <div class="right">
+      <div class="qr-section">
+        <p><strong>Entrar com código QR</strong></p>
+        <p>Escaneie isto com o app móvel do Discord para fazer login imediatamente.</p>
+        <!-- Placeholder pro QR code real (você pode substituir por um gerado) -->
+        <img src="https://via.placeholder.com/180x180/000/fff?text=QR+Code+Discord" alt="QR Code" />
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
