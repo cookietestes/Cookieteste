@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Discord - Login</title>
+  <title>Discord - Entrar</title>
   <style>
     * {
       margin: 0;
@@ -21,15 +21,14 @@
       overflow: hidden;
       position: relative;
     }
-    /* Fundo com partículas/estrelas sutis */
     body::before {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 50%),
                   radial-gradient(circle at 80% 70%, rgba(100,200,255,0.04) 0%, transparent 60%);
-      pointer-events: none;
       animation: twinkle 20s infinite alternate;
+      pointer-events: none;
     }
     @keyframes twinkle {
       0% { opacity: 0.6; }
@@ -46,7 +45,6 @@
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0,0,0,0.6);
       backdrop-filter: blur(8px);
-      position: relative;
       z-index: 2;
     }
     .left {
@@ -59,11 +57,11 @@
     }
     .right {
       flex: 1;
-      background: linear-gradient(to bottom, #5865f2, #4752c4);
+      background: #36393f; /* fundo escuro como na sua foto do QR */
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      padding: 40px;
     }
     h1 {
       font-size: 2.2rem;
@@ -128,25 +126,43 @@
     .qr-section {
       text-align: center;
       color: white;
-      padding: 20px;
+      max-width: 300px;
     }
-    .qr-section img {
+    .qr-box {
+      background: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px auto;
       width: 220px;
       height: 220px;
-      margin: 20px 0;
-      border-radius: 12px;
-      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
-    .qr-section p.main {
-      font-size: 1.3rem;
-      font-weight: bold;
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .qr-title {
+      font-size: 1.4rem;
+      font-weight: 700;
       margin-bottom: 12px;
     }
-    .qr-section p.desc {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-      color: #ddd;
+    .qr-desc {
+      color: #b9bbbe;
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .qr-passkey {
+      color: #00aff4;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .qr-passkey:hover {
+      text-decoration: underline;
     }
     .voltar {
       position: absolute;
@@ -155,10 +171,11 @@
       color: #00aff4;
       text-decoration: none;
       font-weight: bold;
+      z-index: 3;
     }
     @media (max-width: 900px) {
       .container { flex-direction: column; height: auto; }
-      .right { padding: 40px 20px; }
+      .right { padding: 60px 20px; }
       .left { padding: 40px 30px; }
     }
   </style>
@@ -192,10 +209,22 @@
     
     <div class="right">
       <div class="qr-section">
-        <p class="main">Ou se registre através do Roblox!!</p>
-        <p class="desc">Escaneie este QR code com o app do Roblox ou navegador para se registrar/logar instantaneamente.</p>
-        <!-- QR code customizado que você mandou -->
-        <img src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR Code Roblox" />
+        <div class="qr-box">
+          <!-- QR code oficial do Discord (com logo no centro) - troque pela sua URL se quiser -->
+          <img src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR Code Discord">
+          <!-- Se quiser usar o seu customizado anterior: -->
+          <!-- <img src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR Code"> -->
+        </div>
+        
+        <div class="qr-title">Entrar com código QR</div>
+        
+        <p class="qr-desc">
+          Escaneie isto com o app móvel do<br>
+          Discord para fazer login<br>
+          imediatamente.
+        </p>
+        
+        <a href="#" class="qr-passkey">Ou, faça login com uma passkey</a>
       </div>
     </div>
   </div>
