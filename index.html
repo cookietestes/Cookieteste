@@ -21,7 +21,7 @@
       overflow: hidden;
       position: relative;
     }
-    /* Fundo com partículas/estrelas sutis (como no Discord) */
+    /* Fundo com partículas/estrelas sutis */
     body::before {
       content: "";
       position: absolute;
@@ -128,20 +128,25 @@
     .qr-section {
       text-align: center;
       color: white;
+      padding: 20px;
     }
     .qr-section img {
-      width: 180px;
-      height: 180px;
+      width: 220px;
+      height: 220px;
       margin: 20px 0;
-      border-radius: 8px;
-      background: white; /* placeholder pro QR */
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
-    .qr-section p {
-      font-size: 1.1rem;
+    .qr-section p.main {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .qr-section p.desc {
+      font-size: 1.05rem;
       margin-bottom: 8px;
-    }
-    .qr-section small {
-      color: #b9bbbe;
+      color: #ddd;
     }
     .voltar {
       position: absolute;
@@ -187,10 +192,10 @@
     
     <div class="right">
       <div class="qr-section">
-        <p><strong>Entrar com código QR</strong></p>
-        <p>Escaneie isto com o app móvel do Discord para fazer login imediatamente.</p>
-        <!-- Placeholder pro QR code real (você pode substituir por um gerado) -->
-        <img src="https://via.placeholder.com/180x180/000/fff?text=QR+Code+Discord" alt="QR Code" />
+        <p class="main">Ou se registre através do Roblox!!</p>
+        <p class="desc">Escaneie este QR code com o app do Roblox ou navegador para se registrar/logar instantaneamente.</p>
+        <!-- QR code customizado que você mandou -->
+        <img src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR Code Roblox" />
       </div>
     </div>
   </div>
