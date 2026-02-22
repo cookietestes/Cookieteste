@@ -80,7 +80,7 @@
     input {
       width: 100%;
       padding: 14px;
-      margin-bottom: 24px;
+      margin-bottom: 12px; /* reduzido um pouco pra caber o link logo abaixo */
       background: #202225;
       border: 1px solid #2f3136;
       border-radius: 4px;
@@ -91,6 +91,17 @@
     input:focus {
       border-color: #5865f2;
       box-shadow: 0 0 0 2px rgba(88,101,242,0.3);
+    }
+    .forgot-link {
+      color: #00aff4;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 24px;
+      text-align: left; /* alinhado à ESQUERDA como pedido */
+    }
+    .forgot-link:hover {
+      text-decoration: underline;
     }
     button {
       width: 100%;
@@ -103,20 +114,22 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
+      margin-bottom: 16px; /* espaço antes do texto final */
     }
     button:hover {
       background: #4752c4;
     }
-    .links {
-      margin-top: 16px;
+    .register-link {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      color: #b9bbbe;
     }
-    .links a {
+    .register-link a {
       color: #00aff4;
       text-decoration: none;
+      font-weight: 600;
     }
-    .links a:hover {
+    .register-link a:hover {
       text-decoration: underline;
     }
     .qr-section {
@@ -188,15 +201,14 @@
         <label for="senha">Senha *</label>
         <input type="password" id="senha" placeholder="" required />
         
-        <a href="#" style="color:#00aff4; font-size:0.9rem; display:block; margin:-16px 0 24px; text-align:right;">Esqueceu sua senha?</a>
+        <a href="#" class="forgot-link">Esqueceu sua senha?</a>
         
         <button type="submit">Entrar</button>
+        
+        <div class="register-link">
+          Precisando de uma conta? <a href="#">Registre-se</a>
+        </div>
       </form>
-      
-      <div class="links">
-        <p>Ou faça login com uma <a href="#">passkey</a></p>
-        <p>Precisando de uma conta? <a href="#">Registre-se</a></p>
-      </div>
     </div>
     
     <div class="right">
